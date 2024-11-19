@@ -1,4 +1,3 @@
-
 let todoList = {
   todos: [
     {

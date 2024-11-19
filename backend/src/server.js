@@ -15,34 +15,20 @@ const server = () => {
   // Created a POST endpoint that adds a todo and returns the updated list
   server.post('/api/todo', async (req, res) => {
     const { task } = req.body;
-
+  
     if (!task) {
       return res.status(400).json({ message: "Please add a task" });
     }
-
+  
     try {
       const updatedTodos = await todoService.addTodo(task);
       res.status(201).json(updatedTodos);
     } catch (err) {
       console.error("Error adding todo:", err); // Logging the error to help debugging
-      res.status(500).json({ message: "An error has occurred"});
+      res.status(500).json({ message: "Error adding todo", error: err.message }); // More detailed error message
     }
   });
-
-  /**
-  POST /api/todo
-  {
-   "task": "Some API"
-  }
-
-   {
-    "todos": [
-      {
-        "task": "Some API"
-      }
-    ]
-   }
-  **/
+  
 
   return server;
 };
