@@ -6,7 +6,7 @@ const Todo = ({ todo }) => (
     <span
       className="todo-item__text"
     >
-      {todo}
+      {todo.task}
     </span>
   </li>
 );

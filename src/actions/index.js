@@ -6,15 +6,17 @@ export function fetchTodos() {
     return axios
       .get("http://localhost:9091/api/todo")
       .then(({ data }) => {
-        dispatch(setTodos(data));
+        console.log('Fetched Todos:', data); // Add a log here to see the fetched data
+        dispatch(setTodos(data)); // Dispatch to update Redux state
       })
+      .catch((error) => console.error('Error fetching todos:', error)); // Catch any errors
   };
 }
 
-function setTodos(data) {
+function setTodos(todos) {
   return {
     type: FETCH_TODOS,
-    payload: data,
+    payload: { todos },
   };
 }
 
@@ -26,4 +28,5 @@ export function addTodo(newTodo) {
         dispatch(fetchTodos()); // Fetch updated todos after adding the new one
       })
   };
+
 }

@@ -5,12 +5,17 @@ import { connect } from "react-redux";
 import TodoForm from "./TodoForm"; // Importing the correct component
 
 class TodoList extends Component {
+  state = {};
+
   componentDidMount() {
     this.props.fetchTodos();
   }
 
   render() {
     const { todos } = this.props;
+
+    console.log('Todos:', todos);
+
     return (
       <>
         <TodoForm onAddTodo={this.props.addTodo} />
@@ -26,13 +31,9 @@ class TodoList extends Component {
   }
 }
 
-// Map state to props to access todos from the Redux store
-const mapStateToProps = (state) => {
-  console.log("Redux state:", state); // Log the entire Redux state to inspect its structure
-  return {
-    todos: state.todo && state.todo.data ? state.todo.data : [], // Fallback to an empty array if state.todo or state.todo.data is undefined
-  };
-};
+const mapStateToProps = (state) => ({
+  todos: state.data || [],
+});
 
 export default connect(
   mapStateToProps,
